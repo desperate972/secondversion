@@ -103,12 +103,12 @@ public class Battle : MonoBehaviour
     //----
 
     public void Awake()
-	{
+    {
         BattleReady();
     }
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         
     }
@@ -120,15 +120,15 @@ public class Battle : MonoBehaviour
     }
 
     public void ClickBattleStart()
-	{
+    {
         InvokeRepeating("BattleStart", 0, 0.1f);
-	}
+    }
 
     public void BattleStart()
-	{
+    {
         Debug.Log("當前時間:" + BattleTime);
         if(PlayerAttackArrayNum == 4)
-		{
+        {
             PlayerAttackArrayNum = 0;
         }
         if (MonsterAttackArrayNum == 4)
@@ -136,12 +136,12 @@ public class Battle : MonoBehaviour
             MonsterAttackArrayNum = 0;
         }
         if (BattleTime == PlayerAttackArrayTime[PlayerAttackArrayNum] && BattleTime != MonsterAttackArrayTime[MonsterAttackArrayNum])    //----角色可以攻擊但怪物不能攻擊
-		{
+        {
             //PlayerAttackMonster(PlayerAttackArrayNum);             //----檢查角色攻擊範圍是否可以攻擊到怪物
             switch(PlayerCanAttack == 1)
-			{
+            {
                 case true:
-					{
+                    {
                         Debug.Log("本次角色戰鬥套路是第 " + (PlayerAttackArrayNum + 1) + " 招");
                         PlayerAttackCon(PlayerAttackArrayNum);
                         Debug.Log("本次角色造成傷害為: " + PlayerAttackNom);
@@ -150,26 +150,26 @@ public class Battle : MonoBehaviour
                         PlayerAttackArrayTimeAdd(PlayerAttackArrayNum);
                         Debug.Log("下次角色戰鬥套路是第 " + (PlayerAttackArrayNum + 2) + " 招");
                         break;
-					}
+                    }
                 case false:
-					{
+                    {
                         break;
-					}
-			}
+                    }
+            }
             ResetPlayerRange();
             PlayerAttackArrayNum++;
             if(PlayerAttackArrayNum > 4)
-			{
+            {
                 PlayerAttackArrayNum = 0;
             }
         }
         if(BattleTime != PlayerAttackArrayTime[PlayerAttackArrayNum] && BattleTime == MonsterAttackArrayTime[MonsterAttackArrayNum])     //----怪物可以攻擊但角色不能攻擊
-		{
+        {
             //MonsterAttackPlayer(MonsterAttackArrayNum);
             switch(MonsterCanAttack == 1)
-			{
+            {
                 case true:
-					{
+                    {
                         Debug.Log("本次怪物戰鬥套路是第 " + (MonsterAttackArrayNum + 1) + " 招");
                         MonsterAttackCon(MonsterAttackArrayNum);
                         Debug.Log("本次怪物造成傷害為: " + MonsterAttackNom);
@@ -178,12 +178,12 @@ public class Battle : MonoBehaviour
                         MonsterAttackArrayTimeAdd(MonsterAttackArrayNum);
                         Debug.Log("下次怪物戰鬥套路是第 " + (MonsterAttackArrayNum + 2) + " 招");                      
                         break;
-					}
+                    }
                 case false:
-					{
+                    {
                         break;
-					}
-			}
+                    }
+            }
             ResetMonsterRange();
             MonsterAttackArrayNum++;
             if (MonsterAttackArrayNum > 4)
@@ -252,7 +252,7 @@ public class Battle : MonoBehaviour
         BattleTime = float.Parse(BattleString);
 
         if(PlayerHP <= 0 && MonsterHP > 0)                         //----角色血量歸零但怪物沒有
-		{
+        {
             Debug.Log("戰鬥結束，角色血量低於零，怪物勝利!");
             BattleReady();
             CancelInvoke("BattleStart");
@@ -397,15 +397,15 @@ public class Battle : MonoBehaviour
     }
 
     public void PlayerAttackCon(int PlayerAttackNum)                         //----計算本次角色攻擊攻擊造成的傷害數值
-	{
+    {
         switch(PlayerAttackNum)
-		{
+        {
             case 0:
-				{
+                {
                     PlayerAttackNom = PlayerADAttack * (Skill_AttackNum_1 / 100);
                     PlayerAttackNom = Mathf.Round(PlayerAttackNom);
                     break;
-				}
+                }
             case 1:
                 {
                     PlayerAttackNom = PlayerAPAttack * (Skill_AttackNum_2 / 100);
@@ -431,10 +431,10 @@ public class Battle : MonoBehaviour
                     break;
                 }
             default:
-				{
+                {
                     PlayerAttackNom = PlayerADAttack;
                     break;
-				}
+                }
         }
     }
 
@@ -481,14 +481,14 @@ public class Battle : MonoBehaviour
     }
 
     public void PlayerAttackArrayTimeAdd(int PlayerAttackNum)                //----角色攻擊後將攻擊的時間加上
-	{
+    {
         switch(PlayerAttackNum)
-		{
+        {
             case 0:
-				{
+                {
                     PlayerAttackArrayTime[0] = PlayerAttackArrayTime[4] + Skill_Time_1;
                     break;
-				}
+                }
             case 1:
                 {
                     PlayerAttackArrayTime[1] = PlayerAttackArrayTime[0] + Skill_Time_2;
@@ -510,7 +510,7 @@ public class Battle : MonoBehaviour
                     break;
                 }
         }
-	}
+    }
 
     public void MonsterAttackArrayTimeAdd(int MonsterAttackNum)              //----怪物攻擊後將攻擊的時間加上
     {
@@ -547,13 +547,13 @@ public class Battle : MonoBehaviour
     /*public void PlayerAttackMonster(int PlayerSkillNum)                      //----檢查角色攻擊範圍是否可以攻擊到怪物
     {
         switch(PlayerSkillNum)
-		{
+        {
             case 0:
-				{
+                {
                     PlayerAttackRange[Player.PlayerPosition - 1] = 1;
                     MonsterPositionInPlayerRange();
                     break;
-				}
+                }
             case 1:
                 {
                     PlayerAttackRange[Player.PlayerPosition - 2] = 1;
@@ -583,27 +583,27 @@ public class Battle : MonoBehaviour
                     break;
                 }
         }
-	}*/
+    }*/
 
     /*public void MonsterPositionInPlayerRange()
-	{
+    {
         switch(PlayerAttackRange[Monster.MonsterPosition - 1] == 1)
-		{
+        {
             case true:
-				{
+                {
                     PlayerCanAttack = 1;
                     break;
-				}
+                }
             case false:
-				{
+                {
                     PlayerCanAttack = 0;
                     break;
-				}
-		}
-	}*/
+                }
+        }
+    }*/
 
     public void ResetPlayerRange()                                           //----重製角色攻擊範圍陣列
-	{
+    {
         PlayerAttackRange[0] = 0;
         PlayerAttackRange[1] = 0;
         PlayerAttackRange[2] = 0;
@@ -679,7 +679,7 @@ public class Battle : MonoBehaviour
     }
 
     public void BattleReady()                                                //----戰鬥前準備
-	{
+    {
         PlayerNumSetting();
         MonterNumSetting();
         BattleTime = 0;

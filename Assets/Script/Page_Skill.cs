@@ -38,9 +38,9 @@ public class Page_Skill : MonoBehaviour
     public Gamemanager gameobj;
 
     private void Awake()
-	{
+    {
         //Debug.Log("gamemanager的名字:" + gameobj.name);
-		Gamemanager.SkillOrPotion = 0;
+        Gamemanager.SkillOrPotion = 0;
         DownPageChangeNum = 0;
         ChangeDownPage();
         LoadSkill();
@@ -50,8 +50,8 @@ public class Page_Skill : MonoBehaviour
         ChangePotionIcon();
     }
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
     {
 
     }
@@ -68,27 +68,27 @@ public class Page_Skill : MonoBehaviour
         for (int i = 0; i < Gamemanager.Json_SkillFile.JsonSkill.Count; i++)
         {
             foreach(Json_Skill File in Gamemanager.Json_SkillFile.JsonSkill)
-			{
+            {
                 if(File.Id == i)
-				{
+                {
                     switch(File.SkillLearn == 1)
-					{
+                    {
                         case true:
-							{
+                            {
                                 GameObject SkillObj = Instantiate(Grid_SkillChild, Grid_SkillFather.transform);
                                 SkillObj.name = "Skill_" + i;
                                 Skill newSkillObj = SkillObj.GetComponent<Skill>();
                                 newSkillObj.SkillId = i;
                                 learnskillcount++;
                                 break;
-							}
+                            }
                         case false:
-							{
+                            {
                                 break;
-							}
-					}
-				}
-			}
+                            }
+                    }
+                }
+            }
         }
         Debug.Log("顯示目前已學習的技能數量: " + learnskillcount);
     }
@@ -183,7 +183,7 @@ public class Page_Skill : MonoBehaviour
     }
 
     public void ClickButtonSkill()
-	{
+    {
         DownPageChangeNum = 0;
         ChangeDownPage();
         Load_FirstSkillInfo(0);
@@ -192,7 +192,7 @@ public class Page_Skill : MonoBehaviour
     }
 
     public void ClickButtonPotion()
-	{
+    {
         DownPageChangeNum = 1;
         ChangeDownPage();
         Load_FirstPotionInfo(0);
@@ -201,29 +201,29 @@ public class Page_Skill : MonoBehaviour
     }
 
     public void ChangeDownPage()      //切換藥水跟技能列表的按鈕功能
-	{
+    {
         switch(DownPageChangeNum)
-		{
+        {
             case 0:
-				{
+                {
                     DownPage_Skill.SetActive(true);
                     DownPage_SkillInfo.SetActive(true);
                     DownPage_PotionInfo.SetActive(false);
                     DownPage_PotionCount.SetActive(false);
                     DownPage_PotionTime.SetActive(false);                  
                     break;
-				}
+                }
             case 1:
-				{
+                {
                     DownPage_Skill.SetActive(false);
                     DownPage_SkillInfo.SetActive(false);
                     DownPage_PotionInfo.SetActive(true);
                     DownPage_PotionCount.SetActive(true);
                     DownPage_PotionTime.SetActive(true);
                     break;
-				}
-		}
-	}
+                }
+        }
+    }
 
     public void Load_Potion()        //把所擁有的藥水先複製出來形成藥水列表
     {
@@ -247,13 +247,13 @@ public class Page_Skill : MonoBehaviour
             Image EmptyObj_sprite = EmptyObj.GetComponent<Image>();
             Potion newPotionObj = PotionObj.GetComponent<Potion>();
             foreach(Json_Potion date in Gamemanager.Json_PotionFile.JsonPotion)
-			{
+            {
                 if(date.PotionId == newPotionObj.PotionID)
-				{
+                {
                     gameobj.LoadPotionIconFunction(date.PotionIcon);
                     EmptyObj_sprite.sprite = Grid_SkillIconSpriteAtlas.GetSprite(Gamemanager.PotionIconString);                   
-				}
-			}
+                }
+            }
         }
     }
 
@@ -262,9 +262,9 @@ public class Page_Skill : MonoBehaviour
         GameObject EmptyObj = GameObject.Find("Load_Skill/Load_Sprite_Skill_Icon");
         Image EmptyObj_sprite = EmptyObj.GetComponent<Image>();
         foreach (Json_Potion date in Gamemanager.Json_PotionFile.JsonPotion)
-		{
+        {
             if(date.PotionId == PotionId)
-			{
+            {
                 switch (date.PotionIcon)
                 {
                     case 0:
@@ -294,6 +294,6 @@ public class Page_Skill : MonoBehaviour
                 Load_Text_PotionTime.text = "持續:" + date.PotinTime + "秒";
                 Load_Text_PotionCount.text = "最大充衝能:" + date.PotionCount + "次";
             }
-		}
+        }
     }
 }

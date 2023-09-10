@@ -22,12 +22,12 @@ public class Main : MonoBehaviour
     public Gamemanager GamemangerObj;
 
     private void Awake()
-	{
+    {
         Load_PlayerInfo();
     }
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         
     }
@@ -39,7 +39,7 @@ public class Main : MonoBehaviour
     }
 
     public void Load_PlayerInfo()
-	{
+    {
         //-----主畫面上顯示角色血量數值跟血量圖片顯示
         float PlayerHp = Json_Battle_Static.HpNow / Json_Battle_Static.Hp;
         float Load_Sprite_PlayerHpImageWidth = Load_Sprite_PlayerHpObj.GetComponent<RectTransform>().rect.width;
@@ -70,12 +70,12 @@ public class Main : MonoBehaviour
     }    
 
     public void OpenPageCharater()
-	{
+    {
         Page_Charater.SetActive(true);
     }
 
     public void OpenPageItem()
-	{
+    {
         Page_Item.SetActive(true);
     }
 
@@ -88,6 +88,6 @@ public class Main : MonoBehaviour
     {
         GamemanagerObj = GameObject.Find("GameManager");
         GamemangerObj = GamemanagerObj.GetComponent<Gamemanager>();
-		GamemangerObj.LoadBattleSenceFunction();
-	}
+        GamemangerObj.LoadBattleSenceFunction();
+    }
 }

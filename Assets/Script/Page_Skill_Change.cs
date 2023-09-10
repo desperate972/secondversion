@@ -69,15 +69,15 @@ public class Page_Skill_Change : MonoBehaviour
     private bool imagealphachange;
     
     private void Awake()
-	{
+    {
         //imagealpha = 0.1f;
         imagealphachange = false;
         imagealpha = 1f;
         SetButtonId();
     }
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         
     }
@@ -88,13 +88,13 @@ public class Page_Skill_Change : MonoBehaviour
         
     }
 
-	public void FixedUpdate()
-	{
+    public void FixedUpdate()
+    {
         
     }
 
-	public void ClickChangeButton() //開啟要更換技能或藥水的介面
-	{
+    public void ClickChangeButton() //開啟要更換技能或藥水的介面
+    {
         Load_ChangeSkillItem.SetActive(true);
         ChooseId();        
     }
@@ -107,11 +107,11 @@ public class Page_Skill_Change : MonoBehaviour
     }
 
     public void ChooseId()   //依照玩家選擇要更換的是技能還是藥水，將資訊顯示在更換的介面上
-	{
+    {
         switch(Gamemanager.SkillOrPotion)
-		{
+        {
             case 0:
-				{
+                {
                     Debug.Log("這次裝備的內容是技能");
                     SkillChooseObj_1.SetActive(true);
                     SkillChooseObj_2.SetActive(true);
@@ -122,9 +122,9 @@ public class Page_Skill_Change : MonoBehaviour
                     ShowAlreadySkillAndPotion();
                     ShowChangeSkillOrPotionInfo(Gamemanager.SkillId_Choose, 0);
                     break;
-				}
+                }
             case 1:
-				{
+                {
                     Debug.Log("這次裝備的內容是藥水");
                     SkillChooseObj_1.SetActive(false);
                     SkillChooseObj_2.SetActive(false);
@@ -135,12 +135,12 @@ public class Page_Skill_Change : MonoBehaviour
                     ShowAlreadySkillAndPotion();
                     ShowChangeSkillOrPotionInfo(Gamemanager.PotionId_Choose, 1);
                     break;
-				}
-		}
-	}
+                }
+        }
+    }
 
     public void ChangeFunction()   //依照玩家選擇要更換的是技能還是藥水，在更換介面上上同類型的內容閃爍
-	{
+    {
         ChangeChooseImage(SkillChooseObj_1, SkillChoose_1);
         ChangeChooseImage(SkillChooseObj_2, SkillChoose_2);
         ChangeChooseImage(SkillChooseObj_3, SkillChoose_3);
@@ -149,7 +149,7 @@ public class Page_Skill_Change : MonoBehaviour
     }
 
     public void ChangeChooseImage(GameObject choose, Image chooseImage)  //閃爍的功能
-	{
+    {
         chooseImage = choose.GetComponent<Image>();
         Color i = chooseImage.color;
         //i.a = imagealpha;
@@ -157,7 +157,7 @@ public class Page_Skill_Change : MonoBehaviour
 
         
         if (i.a >= 0f && imagealphachange == true)
-		{
+        {
             //因為一開始是直接取物件上的alpha值來做為運算子，但取值很容易取到小數點以下很多位，導致計算結果不如預期
             //所以改成另立變數來做為運算子進行運算，之後再把算好後的值回傳給物件上的alpha值
             //會使用string是為了取小數點以下的數字
@@ -171,7 +171,7 @@ public class Page_Skill_Change : MonoBehaviour
         }
 
         if(i.a <= 1f && imagealphachange == false)
-		{
+        {
             float num = 0.01f;
             string gg = "";
             imagealpha = imagealpha - num;
@@ -205,46 +205,46 @@ public class Page_Skill_Change : MonoBehaviour
     public void LoadIcon(int Iconid, Image IconObj, int type)   //顯示技能或是藥水的ICON圖示的function，0 = Skill，1 = Potion
     {
         switch(type)
-		{
+        {
             case 0:
-				{
+                {
                     gameobj.LoadSkillIconFunction(Iconid);
                     IconObj.sprite = Grid_SkillIconSpriteAtlas.GetSprite(Gamemanager.SkillIconString);
                     break;
-				}
+                }
             case 1:
-				{
+                {
                     gameobj.LoadPotionIconFunction(Iconid);
                     IconObj.sprite = Grid_SkillIconSpriteAtlas.GetSprite(Gamemanager.PotionIconString);
                     break;
-				}
-		}
+                }
+        }
     }
 
     public void ShowChangeSkillOrPotionInfo(int SkillOrPotionId, int SkillOrPotionType)  //顯示要裝備的技能或是藥水的資訊，SkillOrPotionType的數字來判斷目前玩家選擇的是甚麼類型，0 = Skill，1 = Potion
     {
         switch(SkillOrPotionType)
-		{
+        {
             case 0:
-				{
+                {
                     Potion_TimeObj.SetActive(false);
                     Potion_InfoObj.SetActive(false);
                     Skill_InfoObj.SetActive(true);
                     gameobj.LoadSkillIconFunction(SkillOrPotionId);
                     Choose_Icon.sprite = Grid_SkillIconSpriteAtlas.GetSprite(Gamemanager.SkillIconString);
                     foreach (Json_Skill date in Gamemanager.Json_SkillFile.JsonSkill)
-					{
+                    {
                         if(date.Id == SkillOrPotionId)
-						{
+                        {
                             Choose_Name.text = date.SkillName;
                             Choose_Info.text = date.SkillInfo;
                             Choose_CD.text = "冷卻:" + date.SkillCD + "秒";
                         }
-					}
+                    }
                     break;
-				}
+                }
             case 1:
-				{
+                {
                     Potion_TimeObj.SetActive(true);
                     Potion_InfoObj.SetActive(true);
                     Skill_InfoObj.SetActive(false);
@@ -262,12 +262,12 @@ public class Page_Skill_Change : MonoBehaviour
                         }
                     }
                     break;
-				}
-		}
-	}
+                }
+        }
+    }
 
     public void SetButtonId()    //讀取目前已裝備的技能跟藥水的ID到各自的按鈕上
-	{
+    {
         Page_Skill_Change_Item Button_Attack_1_Obj = Button_Attack_1.GetComponent<Page_Skill_Change_Item>();
         Page_Skill_Change_Item Button_Attack_2_Obj = Button_Attack_2.GetComponent<Page_Skill_Change_Item>();
         Page_Skill_Change_Item Button_Attack_3_Obj = Button_Attack_3.GetComponent<Page_Skill_Change_Item>();
@@ -286,16 +286,16 @@ public class Page_Skill_Change : MonoBehaviour
     }
 
     public void ClickButton()  //選擇要更換的技能或藥水顯示出資訊
-	{
+    {
         FirstObj.SetActive(false);
         switch (Gamemanager.SkillOrPotionType_Change == Gamemanager.SkillOrPotion)
         {
             case true:
-				{
+                {
                     switch(Gamemanager.SkillOrPotionType_Change)
-					{
+                    {
                         case 0:
-							{
+                            {
                                 Skill_InfoObj_Change.SetActive(true);
                                 Potion_InfoObj_Change.SetActive(false);
                                 Potion_TimeObj_Change.SetActive(false);
@@ -311,9 +311,9 @@ public class Page_Skill_Change : MonoBehaviour
                                     }
                                 }
                                 break;
-							}
+                            }
                         case 1:
-							{
+                            {
                                 Skill_InfoObj_Change.SetActive(false);
                                 Potion_InfoObj_Change.SetActive(true);
                                 Potion_TimeObj_Change.SetActive(true);
@@ -331,33 +331,33 @@ public class Page_Skill_Change : MonoBehaviour
                                     }
                                 }
                                 break;
-							}
-					}
+                            }
+                    }
                     break;
-				}
+                }
             case false:
-				{
+                {
                     break;
-				}
+                }
         }
     }
 
     public void ChangeSkillOrPotion()  //確實要切換技能或藥水的功能
-	{
+    {
         string Queue;
         KnowSkillOrPotionQueue(out Queue);
         Debug.Log("當前選擇的技能元件:" + Queue);
         Debug.Log("當前要切換的類型:" + Gamemanager.SkillOrPotionType_Change);
         switch (Gamemanager.SkillOrPotionType_Change)
-		{
+        {
             case 0:  //要更換的是技能
-				{
+                {
                     Debug.Log("當前選擇的技能編號:" + Gamemanager.SkillId_Choose); 
                     gameobj.LoadSkill();
                     switch (Queue)
-					{
+                    {
                         case "Attack_Queue_1":
-							{
+                            {
                                 foreach (Json_Skill date in Gamemanager.Json_SkillFile.JsonSkill)
                                 {
                                     if (date.Id == Gamemanager.SkillId_Choose)
@@ -374,7 +374,7 @@ public class Page_Skill_Change : MonoBehaviour
                                 File.WriteAllText(Application.persistentDataPath + @"\Player_Battle.json", FileNew);
                                 ClosePage_Load_ChangeSkillItem();                                
                                 break;
-							}
+                            }
                         case "Attack_Queue_2":
                             {
                                 foreach (Json_Skill date in Gamemanager.Json_SkillFile.JsonSkill)
@@ -415,15 +415,15 @@ public class Page_Skill_Change : MonoBehaviour
                             }
                     }
                     break;
-				}
+                }
             case 1:  //要更換的是藥水
                 {
                     Debug.Log("當前選擇的技能編號:" + Gamemanager.PotionId_Choose);
                     gameobj.LoadPotion();
                     switch(Queue)
-					{
+                    {
                         case "Potion_Queue_1":
-							{
+                            {
                                 foreach (Json_Potion date in Gamemanager.Json_PotionFile.JsonPotion)
                                 {
                                     if (date.PotionId == Gamemanager.PotionId_Choose)
@@ -442,7 +442,7 @@ public class Page_Skill_Change : MonoBehaviour
                                 File.WriteAllText(Application.persistentDataPath + @"\Player_Battle.json", FileNew);
                                 ClosePage_Load_ChangeSkillItem();
                                 break;
-							}
+                            }
                         case "Potion_Queue_2":
                             {
                                 foreach (Json_Potion date in Gamemanager.Json_PotionFile.JsonPotion)
@@ -466,22 +466,22 @@ public class Page_Skill_Change : MonoBehaviour
                             }
                     }
                     break;
-				}
+                }
         }
         gameobj.Load_Player_Battle();
         SetButtonId();
     }
 
     public void KnowSkillOrPotionQueue(out string QueueString)
-	{
+    {
         QueueString = "";
         switch (Gamemanager.SkillOrPotion_Queue)
-		{
+        {
             case "Button_Attack_1":
-				{
+                {
                     QueueString = "Attack_Queue_1";
                     break;
-				}
+                }
             case "Button_Attack_2":
                 {
                     QueueString = "Attack_Queue_2";
@@ -503,5 +503,5 @@ public class Page_Skill_Change : MonoBehaviour
                     break;
                 }
         }
-	}
+    }
 }

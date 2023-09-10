@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class Json_Monster_Static
 {
-	
+    
 }

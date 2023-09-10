@@ -20,7 +20,7 @@ public class Potion : MonoBehaviour
     }
 
     public void ClickPotionIcon()
-	{
+    {
         PageSkillObj.Load_FirstPotionInfo(PotionID);
         Gamemanager.PotionId_Choose = PotionID;
         //Gamemanager.SkillOrPotion_Queue = this.gameObject.name;

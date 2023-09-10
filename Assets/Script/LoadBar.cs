@@ -21,20 +21,20 @@ public class LoadBar : MonoBehaviour
     }
 
     public void CloseLoadBar()
-	{
+    {
         switch(Load_Text_Bar.text == "100%")
-		{
+        {
             case true:
-				{
+                {
                     Destroy(Load_BarObj);
                     break;
-				}
+                }
             case false:
-				{
+                {
                     Debug.Log("進度還未跑完");
                     break;
-				}
-		}
+                }
+        }
     }
 
 }

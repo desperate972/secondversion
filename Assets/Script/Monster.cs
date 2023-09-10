@@ -39,15 +39,15 @@ public class Monster : MonoBehaviour
     public GameObject ProjectileObj;
     private GameObject EmptyObj_Projectile;
 
-	public Battle_Calculate CalculateObj;
+    public Battle_Calculate CalculateObj;
 
-	public void Awake()
-	{
+    public void Awake()
+    {
 
     }
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         Debug.Log("怪物位置:" + MonsterPosition);
         MonsterPositionText.text = MonsterPosition.ToString();
@@ -65,8 +65,8 @@ public class Monster : MonoBehaviour
 
         InvokeRepeating("MonsterAttack", 1, 1);
         PlayerObj = GameObject.Find("Player").GetComponent<Player>();
-		CalculateObj = GameObject.Find("BackGround").GetComponent<Battle_Calculate>();
-	}
+        CalculateObj = GameObject.Find("BackGround").GetComponent<Battle_Calculate>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -76,8 +76,8 @@ public class Monster : MonoBehaviour
 
     public void SetMonster()   //簡單設置怪物數值
     {
-		MonsterStaticToNum(MonsterPosition);
-		//MonsterHp = 11f;
+        MonsterStaticToNum(MonsterPosition);
+        //MonsterHp = 11f;
         //MonsterHpNow = 11f;
         MonsterHpText.text = MonsterHpNow + "/" + MonsterHp;
         MonsterAttackNumNow = 0;
@@ -87,7 +87,7 @@ public class Monster : MonoBehaviour
         //MonsterCritRate = 0.1f;
 
 
-		MonsterAttackArray = new int[5];
+        MonsterAttackArray = new int[5];
         MonsterAttackArray[0] = 0;
         MonsterAttackArray[1] = 0;
         MonsterAttackArray[2] = 0;
@@ -95,7 +95,7 @@ public class Monster : MonoBehaviour
         MonsterAttackArray[4] = 0;
 
         for (int i = 0; i < 5; i++)
-		{
+        {
             int num = Random.Range(0, 4);
             MonsterAttackArray[i] = num;
             Debug.Log("怪物攻擊順序第" + (i + 1) + "個的攻擊編號是:" + MonsterAttackArray[i]);
@@ -111,7 +111,7 @@ public class Monster : MonoBehaviour
     {
         MonsterHpText.text = MonsterHpNow + "/" + MonsterHp;
         MonsterNumToStatic(MonsterPosition);
-		MonsterDie();
+        MonsterDie();
     }
 
     public void OnTriggerEnter(Collider Obj)  //碰撞到投射物
@@ -195,11 +195,11 @@ public class Monster : MonoBehaviour
     }
 
     public void MonsterDie()    //怪物死亡
-	{
+    {
         switch(MonsterHpNow <= 0)
-		{
+        {
             case true:
-				{
+                {
                     Debug.Log("怪物死亡!");
                     CancelInvoke("MonsterAttack");
                     emptyObj = GameObject.Find("BackGround");
@@ -212,18 +212,18 @@ public class Monster : MonoBehaviour
                                 emptyObj.GetComponent<Battle_Second>().MonsterWaveNum++;
                                 emptyObj.GetComponent<Battle_Second>().BattleEndDeleteProjectile();
                                 switch (emptyObj.GetComponent<Battle_Second>().MonsterWaveNum == 3)
-								{
+                                {
                                     case true:
-										{
+                                        {
                                             emptyObj.GetComponent<Battle_Second>().MonsterWaveNum = 0;
                                             emptyObj.GetComponent<Battle_Second>().WavePauseNum = 2;
                                             break;
-										}
+                                        }
                                     case false:
-										{
+                                        {
                                             break;
-										}
-								}
+                                        }
+                                }
                                 emptyObj.GetComponent<Battle_Second>().WavePause();
                                 break;
                             }
@@ -235,26 +235,26 @@ public class Monster : MonoBehaviour
                     }
                     Destroy(gameObject);
                     break;
-				}
+                }
             case false:
-				{
+                {
                     break;
-				}
-		}
-	}
+                }
+        }
+    }
 
     public void MonsterAttackRandom()   //怪物攻擊內容隨機
-	{
+    {
         switch (MonsterAttackNum)
-		{
+        {
             case 0:
-				{
+                {
                     MonsterAttackCD = 3f;
                     MonsterAttackCDNow = 3f;
                     MonsterAttackDamge = 2f;
                     MonsterProject = 0;
                     break;
-				}
+                }
             case 1:
                 {
                     MonsterAttackCD = 2f;
@@ -280,53 +280,53 @@ public class Monster : MonoBehaviour
                     break;
                 }
         }
-	}
+    }
 
     public void MonsterAttack()        //怪物攻擊
-	{
+    {
         float MonsterTrueDamge = 0;
-		MonsterAttackCDNow = Mathf.Round(MonsterAttackCDNow) - 1f;
+        MonsterAttackCDNow = Mathf.Round(MonsterAttackCDNow) - 1f;
         MonsterAttackCDText.text = Mathf.Round(MonsterAttackCDNow).ToString();
         switch (MonsterAttackCDNow == 0)
-		{
+        {
             case true:
-				{                   
+                {                   
                     switch(Player.PlayerPosition == MonsterPosition)     //判斷怪物跟玩家是否在同一位置
-					{
+                    {
                         case true:
-							{
+                            {
                                 switch(MonsterProject == 1)
-								{
+                                {
                                     case true:
-										{
+                                        {
                                             Debug.Log("玩家被投射物攻擊，投射物會造成" + MonsterAttackDamge + "傷害");
                                             MonsterProjectAttack();
                                             break;
-										}
+                                        }
                                     case false:
-										{
+                                        {
                                             Debug.Log("玩家被攻擊，受到" + MonsterAttackDamge + "傷害");
                                             switch(PlayerObj.Cover_PlayerNow == 1)    //判斷玩家是否在無敵狀態
-											{
+                                            {
                                                 case true:
-													{
+                                                    {
                                                         break;
-													}
+                                                    }
                                                 case false:
-													{
+                                                    {
                                                         CalculateObj.CalulatePlayerArmor(MonsterAttackDamge, out MonsterTrueDamge);
-														Json_Battle_Static.HpNow = Json_Battle_Static.HpNow - MonsterTrueDamge;
+                                                        Json_Battle_Static.HpNow = Json_Battle_Static.HpNow - MonsterTrueDamge;
                                                         break;
-													}
-											}                                            
+                                                    }
+                                            }                                            
                                             PlayerObj.Reflash();
                                             break;
-										}
-								}                                
+                                        }
+                                }                                
                                 break;
-							}
+                            }
                         case false:
-							{
+                            {
                                 switch (MonsterProject == 1)   //判斷即使玩家跟怪物不在同一位置上，但是攻擊是投射物也要攻擊
                                 {
                                     case true:
@@ -341,34 +341,34 @@ public class Monster : MonoBehaviour
                                 }
                                 PlayerObj.Reflash();
                                 break;
-							}
+                            }
                     }
                     MonsterAttackNumNow++;
                     switch (MonsterAttackNumNow == 5)
-					{
+                    {
                         case true:
-							{
+                            {
                                 MonsterAttackNumNow = 0;
                                 break;
-							}
+                            }
                         case false:
-							{
+                            {
                                 break;
-							}
-					}
+                            }
+                    }
                     MonsterAttackNum = MonsterAttackArray[MonsterAttackNumNow];
                     MonsterAttackRandom();
                     break;
-				}
+                }
             case false:
-				{
+                {
                     break;
-				}
-		}
+                }
+        }
     }
 
     public void MonsterProjectAttack()   //怪物使用投射物攻擊
-	{
+    {
         GameObject RoadSpwan = Road_3;
         switch (MonsterPosition)
         {
@@ -407,107 +407,107 @@ public class Monster : MonoBehaviour
 
     public void MonsterStaticToNum(int MonsterPotionNum)  //將怪物的靜態資料轉變成這支怪物的屬性數值
     {
-		switch (MonsterPotionNum)
-		{
-			case 1:
-				{
-					MonsterHp = Json_Battle_Monster_Static.MonsterHp_1;
-					MonsterHpNow = Json_Battle_Monster_Static.MonsterHpNow_1;
-					MonsterDageRate = Json_Battle_Monster_Static.MonsterArmorRate_1;
-					MonsterArmorRate = Json_Battle_Monster_Static.MonsterDodgeRate_1;
-					MonsterCritRate = Json_Battle_Monster_Static.MonsterCritRate_1;
-					break;
-				}
-			case 2:
-				{
-					MonsterHp = Json_Battle_Monster_Static.MonsterHp_2;
-					MonsterHpNow = Json_Battle_Monster_Static.MonsterHpNow_2;
-					MonsterDageRate = Json_Battle_Monster_Static.MonsterArmorRate_2;
-					MonsterArmorRate = Json_Battle_Monster_Static.MonsterDodgeRate_2;
-					MonsterCritRate = Json_Battle_Monster_Static.MonsterCritRate_2;
-					break;
-				}
-			case 3:
-				{
-					MonsterHp = Json_Battle_Monster_Static.MonsterHp_3;
-					MonsterHpNow = Json_Battle_Monster_Static.MonsterHpNow_3;
-					MonsterDageRate = Json_Battle_Monster_Static.MonsterArmorRate_3;
-					MonsterArmorRate = Json_Battle_Monster_Static.MonsterDodgeRate_3;
-					MonsterCritRate = Json_Battle_Monster_Static.MonsterCritRate_3;
-					break;
-				}
-			case 4:
-				{
-					MonsterHp = Json_Battle_Monster_Static.MonsterHp_4;
-					MonsterHpNow = Json_Battle_Monster_Static.MonsterHpNow_4;
-					MonsterDageRate = Json_Battle_Monster_Static.MonsterArmorRate_4;
-					MonsterArmorRate = Json_Battle_Monster_Static.MonsterDodgeRate_4;
-					MonsterCritRate = Json_Battle_Monster_Static.MonsterCritRate_4;
-					break;
-				}
-			case 5:
-				{
-					MonsterHp = Json_Battle_Monster_Static.MonsterHp_5;
-					MonsterHpNow = Json_Battle_Monster_Static.MonsterHpNow_5;
-					MonsterDageRate = Json_Battle_Monster_Static.MonsterArmorRate_5;
-					MonsterArmorRate = Json_Battle_Monster_Static.MonsterDodgeRate_5;
-					MonsterCritRate = Json_Battle_Monster_Static.MonsterCritRate_5;
-					break;
-				}
-		}
+        switch (MonsterPotionNum)
+        {
+            case 1:
+                {
+                    MonsterHp = Json_Battle_Monster_Static.MonsterHp_1;
+                    MonsterHpNow = Json_Battle_Monster_Static.MonsterHpNow_1;
+                    MonsterDageRate = Json_Battle_Monster_Static.MonsterArmorRate_1;
+                    MonsterArmorRate = Json_Battle_Monster_Static.MonsterDodgeRate_1;
+                    MonsterCritRate = Json_Battle_Monster_Static.MonsterCritRate_1;
+                    break;
+                }
+            case 2:
+                {
+                    MonsterHp = Json_Battle_Monster_Static.MonsterHp_2;
+                    MonsterHpNow = Json_Battle_Monster_Static.MonsterHpNow_2;
+                    MonsterDageRate = Json_Battle_Monster_Static.MonsterArmorRate_2;
+                    MonsterArmorRate = Json_Battle_Monster_Static.MonsterDodgeRate_2;
+                    MonsterCritRate = Json_Battle_Monster_Static.MonsterCritRate_2;
+                    break;
+                }
+            case 3:
+                {
+                    MonsterHp = Json_Battle_Monster_Static.MonsterHp_3;
+                    MonsterHpNow = Json_Battle_Monster_Static.MonsterHpNow_3;
+                    MonsterDageRate = Json_Battle_Monster_Static.MonsterArmorRate_3;
+                    MonsterArmorRate = Json_Battle_Monster_Static.MonsterDodgeRate_3;
+                    MonsterCritRate = Json_Battle_Monster_Static.MonsterCritRate_3;
+                    break;
+                }
+            case 4:
+                {
+                    MonsterHp = Json_Battle_Monster_Static.MonsterHp_4;
+                    MonsterHpNow = Json_Battle_Monster_Static.MonsterHpNow_4;
+                    MonsterDageRate = Json_Battle_Monster_Static.MonsterArmorRate_4;
+                    MonsterArmorRate = Json_Battle_Monster_Static.MonsterDodgeRate_4;
+                    MonsterCritRate = Json_Battle_Monster_Static.MonsterCritRate_4;
+                    break;
+                }
+            case 5:
+                {
+                    MonsterHp = Json_Battle_Monster_Static.MonsterHp_5;
+                    MonsterHpNow = Json_Battle_Monster_Static.MonsterHpNow_5;
+                    MonsterDageRate = Json_Battle_Monster_Static.MonsterArmorRate_5;
+                    MonsterArmorRate = Json_Battle_Monster_Static.MonsterDodgeRate_5;
+                    MonsterCritRate = Json_Battle_Monster_Static.MonsterCritRate_5;
+                    break;
+                }
+        }
         Debug.Log("成功將怪物的靜態資料轉變成這支怪物的屬性數值");
-	}
+    }
 
-	public void MonsterNumToStatic(int MonsterPotionNum)  //將這支怪物的屬性數值轉變成怪物的靜態資料
-	{
-		switch (MonsterPotionNum)
-		{
-			case 1:
-				{
-					Json_Battle_Monster_Static.MonsterHp_1 = MonsterHp;
-					Json_Battle_Monster_Static.MonsterHpNow_1 = MonsterHpNow;
-					Json_Battle_Monster_Static.MonsterArmorRate_1 = MonsterDageRate;
-					Json_Battle_Monster_Static.MonsterDodgeRate_1 = MonsterArmorRate;
-					Json_Battle_Monster_Static.MonsterCritRate_1 = MonsterCritRate;
-					break;
-				}
-			case 2:
-				{
-					Json_Battle_Monster_Static.MonsterHp_2 = MonsterHp;
-					Json_Battle_Monster_Static.MonsterHpNow_2 = MonsterHpNow;
-					Json_Battle_Monster_Static.MonsterArmorRate_2 = MonsterDageRate;
-					Json_Battle_Monster_Static.MonsterDodgeRate_2 = MonsterArmorRate;
-					Json_Battle_Monster_Static.MonsterCritRate_2 = MonsterCritRate;
-					break;
-				}
-			case 3:
-				{
-					Json_Battle_Monster_Static.MonsterHp_3 = MonsterHp;
-					Json_Battle_Monster_Static.MonsterHpNow_3 = MonsterHpNow;
-					Json_Battle_Monster_Static.MonsterArmorRate_3 = MonsterDageRate;
-					Json_Battle_Monster_Static.MonsterDodgeRate_3 = MonsterArmorRate;
-					Json_Battle_Monster_Static.MonsterCritRate_3 = MonsterCritRate;
-					break;
-				}
-			case 4:
-				{
-					Json_Battle_Monster_Static.MonsterHp_4 = MonsterHp;
-					Json_Battle_Monster_Static.MonsterHpNow_4 = MonsterHpNow;
-					Json_Battle_Monster_Static.MonsterArmorRate_4 = MonsterDageRate;
-					Json_Battle_Monster_Static.MonsterDodgeRate_4 = MonsterArmorRate;
-					Json_Battle_Monster_Static.MonsterCritRate_4 = MonsterCritRate;
-					break;
-				}
-			case 5:
-				{
-					Json_Battle_Monster_Static.MonsterHp_5 = MonsterHp;
-					Json_Battle_Monster_Static.MonsterHpNow_5 = MonsterHpNow;
-					Json_Battle_Monster_Static.MonsterArmorRate_5 = MonsterDageRate;
-					Json_Battle_Monster_Static.MonsterDodgeRate_5 = MonsterArmorRate;
-					Json_Battle_Monster_Static.MonsterCritRate_5 = MonsterCritRate;
-					break;
-				}
-		}
-		Debug.Log("成功將這支怪物的屬性數值轉變成怪物的靜態資料" + "\n" + "該怪物的位置" + MonsterPotionNum);
-	}
+    public void MonsterNumToStatic(int MonsterPotionNum)  //將這支怪物的屬性數值轉變成怪物的靜態資料
+    {
+        switch (MonsterPotionNum)
+        {
+            case 1:
+                {
+                    Json_Battle_Monster_Static.MonsterHp_1 = MonsterHp;
+                    Json_Battle_Monster_Static.MonsterHpNow_1 = MonsterHpNow;
+                    Json_Battle_Monster_Static.MonsterArmorRate_1 = MonsterDageRate;
+                    Json_Battle_Monster_Static.MonsterDodgeRate_1 = MonsterArmorRate;
+                    Json_Battle_Monster_Static.MonsterCritRate_1 = MonsterCritRate;
+                    break;
+                }
+            case 2:
+                {
+                    Json_Battle_Monster_Static.MonsterHp_2 = MonsterHp;
+                    Json_Battle_Monster_Static.MonsterHpNow_2 = MonsterHpNow;
+                    Json_Battle_Monster_Static.MonsterArmorRate_2 = MonsterDageRate;
+                    Json_Battle_Monster_Static.MonsterDodgeRate_2 = MonsterArmorRate;
+                    Json_Battle_Monster_Static.MonsterCritRate_2 = MonsterCritRate;
+                    break;
+                }
+            case 3:
+                {
+                    Json_Battle_Monster_Static.MonsterHp_3 = MonsterHp;
+                    Json_Battle_Monster_Static.MonsterHpNow_3 = MonsterHpNow;
+                    Json_Battle_Monster_Static.MonsterArmorRate_3 = MonsterDageRate;
+                    Json_Battle_Monster_Static.MonsterDodgeRate_3 = MonsterArmorRate;
+                    Json_Battle_Monster_Static.MonsterCritRate_3 = MonsterCritRate;
+                    break;
+                }
+            case 4:
+                {
+                    Json_Battle_Monster_Static.MonsterHp_4 = MonsterHp;
+                    Json_Battle_Monster_Static.MonsterHpNow_4 = MonsterHpNow;
+                    Json_Battle_Monster_Static.MonsterArmorRate_4 = MonsterDageRate;
+                    Json_Battle_Monster_Static.MonsterDodgeRate_4 = MonsterArmorRate;
+                    Json_Battle_Monster_Static.MonsterCritRate_4 = MonsterCritRate;
+                    break;
+                }
+            case 5:
+                {
+                    Json_Battle_Monster_Static.MonsterHp_5 = MonsterHp;
+                    Json_Battle_Monster_Static.MonsterHpNow_5 = MonsterHpNow;
+                    Json_Battle_Monster_Static.MonsterArmorRate_5 = MonsterDageRate;
+                    Json_Battle_Monster_Static.MonsterDodgeRate_5 = MonsterArmorRate;
+                    Json_Battle_Monster_Static.MonsterCritRate_5 = MonsterCritRate;
+                    break;
+                }
+        }
+        Debug.Log("成功將這支怪物的屬性數值轉變成怪物的靜態資料" + "\n" + "該怪物的位置" + MonsterPotionNum);
+    }
 }

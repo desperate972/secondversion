@@ -76,10 +76,10 @@ public class Player : MonoBehaviour
     public Gamemanager GamemanagerObj;
     public Battle_Calculate CalculateObj;
 
-	private GameObject emptyObj;
+    private GameObject emptyObj;
 
     private void Awake()
-	{
+    {
         MoveX = 0;
         PlayerPosition = 3;
         PlayerPositionText.text = PlayerPosition.ToString();
@@ -87,8 +87,8 @@ public class Player : MonoBehaviour
         PlayerSkillNum = 6;
     }
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
     {
 
     }
@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
         switch(PlayerAttackRange)  //判斷玩家攻擊範圍，如果是1就要判斷玩家所在的位置有沒有怪物，如果攻擊範圍超過1，那就表示就算玩家所在的位置沒有怪物仍然可以進行攻擊打到怪物
         {
             case 1:
-				{
+                {
                     for (int i = 0; i < 6; i++)   //會做這段是為了之後如果怪物會移動，但怪物名稱不會隨著怪物的位置(MonsterPosition)這個值做變化，所以必須要檢查所有怪物的位置來做是否會被攻擊的判斷
                     {
                         EmptyObj = GameObject.Find("Monster_" + i);
@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
                                                 CalculateObj.CalculatePlayerDamge(Attack_SkillId, out PlayerDamge);
                                                 Debug.Log("成功對怪物造成 " + PlayerDamge + " 點傷害");
                                                 EmptyObj.GetComponent<Monster>().MonsterHpNow = EmptyObj.GetComponent<Monster>().MonsterHpNow - PlayerDamge;
-												EmptyObj.GetComponent<Monster>().Reflash();
+                                                EmptyObj.GetComponent<Monster>().Reflash();
                                                 break;
                                             }
                                         case false:
@@ -139,9 +139,9 @@ public class Player : MonoBehaviour
                         }
                     }
                     break;
-				}
+                }
             case 3:
-				{
+                {
                     for (int m = 0; m < 6; m++)    //因為玩家在的位置可能不會有怪，但因為攻擊範圍的關係可以打到旁邊的怪，所以這樣做判斷
                     {
                         EmptyObj = GameObject.Find("Monster_" + m);
@@ -153,9 +153,9 @@ public class Player : MonoBehaviour
                                     {
                                         case true:
                                             {
-												CalculateObj.CalculatePlayerDamge(Attack_SkillId, out PlayerDamge);
-												EmptyObj.GetComponent<Monster>().MonsterHpNow = EmptyObj.GetComponent<Monster>().MonsterHpNow - PlayerDamge;
-												EmptyObj.GetComponent<Monster>().Reflash();
+                                                CalculateObj.CalculatePlayerDamge(Attack_SkillId, out PlayerDamge);
+                                                EmptyObj.GetComponent<Monster>().MonsterHpNow = EmptyObj.GetComponent<Monster>().MonsterHpNow - PlayerDamge;
+                                                EmptyObj.GetComponent<Monster>().Reflash();
                                                 break;
                                             }
                                         case false:
@@ -172,9 +172,9 @@ public class Player : MonoBehaviour
                         }
                     }
                     break;
-				}
+                }
             case 5:    //攻擊全體怪物
-				{
+                {
                     for (int m = 0; m < 6; m++)
                     {
                         EmptyObj = GameObject.Find("Monster_" + m);
@@ -182,9 +182,9 @@ public class Player : MonoBehaviour
                         {
                             case true:
                                 {
-									CalculateObj.CalculatePlayerDamge(Attack_SkillId, out PlayerDamge);
-									EmptyObj.GetComponent<Monster>().MonsterHpNow = EmptyObj.GetComponent<Monster>().MonsterHpNow - PlayerDamge;
-									EmptyObj.GetComponent<Monster>().Reflash();
+                                    CalculateObj.CalculatePlayerDamge(Attack_SkillId, out PlayerDamge);
+                                    EmptyObj.GetComponent<Monster>().MonsterHpNow = EmptyObj.GetComponent<Monster>().MonsterHpNow - PlayerDamge;
+                                    EmptyObj.GetComponent<Monster>().Reflash();
                                     break;
                                 }
                             case false:
@@ -194,13 +194,13 @@ public class Player : MonoBehaviour
                         }
                     }
                     break;
-				}
+                }
             default:
-				{
+                {
                     Debug.Log("攻擊範圍錯誤，無法執行攻擊");
                     break;
-				}
-		}
+                }
+        }
     }
 
     public void Attack_ProjectileClic(int Attack_SkillId)  //使用投射物按鈕攻擊
@@ -236,29 +236,29 @@ public class Player : MonoBehaviour
         }
 
         switch(PlayerAttackRangeProject)
-		{
+        {
             case 1:
-				{
+                {
                     EmptyObj_Projectile = Instantiate(ProjectileObj, RoadSpwan.transform);
                     EmptyObj_Projectile.GetComponent<Projectile>().AttackType = 0;
                     EmptyObj_Projectile.transform.localPosition = new Vector3(0, 250, 0);
                     EmptyObj_Projectile.GetComponent<Projectile>().ProjectileNum = PlayerSkillNum;
                     break;
-				}
+                }
             case 3:
-				{
+                {
                     for(int p = 0; p < 4; p++)
-					{
+                    {
                         switch(p)
-						{
+                        {
                             case 0:
-								{
+                                {
                                     EmptyObj_Projectile = Instantiate(ProjectileObj, RoadSpwan.transform);
                                     EmptyObj_Projectile.GetComponent<Projectile>().AttackType = 0;
                                     EmptyObj_Projectile.transform.localPosition = new Vector3(0, 250, 0);
                                     EmptyObj_Projectile.GetComponent<Projectile>().ProjectileNum = PlayerSkillNum;
                                     break;
-								}
+                                }
                             case 1:
                                 {
                                     EmptyObj_Projectile = Instantiate(ProjectileObj, RoadSpwan.transform);
@@ -276,11 +276,11 @@ public class Player : MonoBehaviour
                                     break;
                                 }
                         }
-					}
+                    }
                     break;
-				}
+                }
             case 5:
-				{
+                {
                     for (int p = 0; p < 6; p++)
                     {
                         switch (p)
@@ -328,8 +328,8 @@ public class Player : MonoBehaviour
                         }
                     }
                     break;
-				}
-		}
+                }
+        }
 
         
     }
@@ -343,22 +343,22 @@ public class Player : MonoBehaviour
     public void Button_LeftClick()  //當玩家向左移動時，玩家位置數字減少，怪物會遠離玩家原本位置所以增加
     {
         switch(PlayerPosition == 1)
-		{
+        {
             case true:
-				{
+                {
                     ShowPlayerPosition();
                     break;
-				}
+                }
             case false:
-				{
+                {
                     KnowPlayerPositionNowGoLeft();
                     StartCoroutine(MonsterGroupMove());
                     Debug.Log("有觸發到嗎?");
                     PlayerPosition--;
                     ShowPlayerPosition();
                     break;
-				}
-		}
+                }
+        }
     }
 
     public void Button_RightClick()  //當玩家向右移動時，玩家位置數字增加，怪物會遠離玩家原本位置所以減少
@@ -382,14 +382,14 @@ public class Player : MonoBehaviour
     }
 
     public void KnowPlayerPositionNowGoLeft()
-	{
+    {
         switch(PlayerPosition)
-		{
+        {
             case 1:
-				{
+                {
                     Debug.Log("理論上不應該顯示這個Left");
                     break;
-				}
+                }
             case 2:
                 {
                     MoveX = 640;
@@ -412,7 +412,7 @@ public class Player : MonoBehaviour
                 }
 
         }
-	}
+    }
 
     public void KnowPlayerPositionNowGoRight()
     {
@@ -448,7 +448,7 @@ public class Player : MonoBehaviour
     }
 
     IEnumerator MonsterGroupMove()     //玩家移動的function，但因為螢幕顯示的限制，畫面上看起來是玩家在移動，實際上是怪物的物件在移動
-	{
+    {
         Debug.Log("是否有觸發?");
         while(MonsterGroupObj.transform.localPosition.x != MoveX)
         {
@@ -468,36 +468,36 @@ public class Player : MonoBehaviour
     }
 
     public void SetPlayer()  //簡單設置玩家數值
-	{
+    {
         PlayerHp = Json_Battle_Static.Hp;
-		PlayerHpNow = Json_Battle_Static.HpNow;
-		PlayerHpText.text = Json_Battle_Static.HpNow + "/" + Json_Battle_Static.Hp;
+        PlayerHpNow = Json_Battle_Static.HpNow;
+        PlayerHpText.text = Json_Battle_Static.HpNow + "/" + Json_Battle_Static.Hp;
         PlayerAttackRange = 1;  //玩家攻擊範圍
         PlayerAttackRangeProject = 5;  //玩家投射物的攻擊範圍，之後會刪掉，之後會取實際技能給的數值
         AttackCDNum_1 = Json_Battle_Player_Static.AttackCD_1;
-		AttackCDNum_2 = Json_Battle_Player_Static.AttackCD_2;
-		AttackCDNum_3 = Json_Battle_Player_Static.AttackCD_3;
+        AttackCDNum_2 = Json_Battle_Player_Static.AttackCD_2;
+        AttackCDNum_3 = Json_Battle_Player_Static.AttackCD_3;
         ItemCDNum_1 = Json_Battle_Player_Static.PotionCD_1;
-		ItemCDNum_2 = Json_Battle_Player_Static.PotionCD_2;
-	}
+        ItemCDNum_2 = Json_Battle_Player_Static.PotionCD_2;
+    }
 
     public void Reflash()    //刷新玩家數值
-	{
+    {
         switch(Json_Battle_Static.HpNow <= 0)
-		{
+        {
             case true:
-				{
+                {
                     emptyObj = GameObject.Find("BackGround");
                     emptyObj.GetComponent<Battle_Second>().WavePauseNum = 3;
                     emptyObj.GetComponent<Battle_Second>().WavePause();
                     break;
-				}
+                }
             case false:
-				{
+                {
                     PlayerHpText.text = Json_Battle_Static.HpNow + "/" + Json_Battle_Static.Hp;
                     break;
-				}
-		}
+                }
+        }
     }
 
     public void OnTriggerEnter(Collider Obj)   //collider碰撞判定
@@ -505,34 +505,34 @@ public class Player : MonoBehaviour
         Debug.Log("撞到怪物了!");
         float takedamge = Obj.GetComponent<Projectile>().ProjectileDamge;
         switch(Obj.GetComponent<Projectile>().AttackType)
-		{
+        {
             case 0:
-				{
+                {
                     break;
-				}
+                }
             case 1:
-				{
+                {
                     switch(Cover_PlayerNow == 1)
-					{
+                    {
                         case true:
-							{
+                            {
                                 break;
-							}
+                            }
                         case false:
-							{
-								Json_Battle_Static.HpNow = Json_Battle_Static.HpNow - takedamge;
+                            {
+                                Json_Battle_Static.HpNow = Json_Battle_Static.HpNow - takedamge;
                                 break;
-							}
-					}
+                            }
+                    }
                     Reflash();
                     Destroy(Obj.gameObject);
                     break;
-				}
-		}       
+                }
+        }       
     }
 
     public void Button_Attack_1()   //第一個攻擊按鈕(主要攻擊)
-	{
+    {
         //這裡需要去抓玩家設定的主要攻擊技能編號來判斷是甚麼攻擊方式
         Debug.Log("有觸發到攻擊嗎?");
         bool AttackOrProject;
@@ -541,13 +541,13 @@ public class Player : MonoBehaviour
         {
             case true:
                 {
-					Attack_ProjectileClic(Json_Battle_Player_Static.Attack_SkillId_1);
-					break;
+                    Attack_ProjectileClic(Json_Battle_Player_Static.Attack_SkillId_1);
+                    break;
                 }
             case false:
                 {
-					AttackClick(Json_Battle_Player_Static.Attack_SkillId_1);
-					break;
+                    AttackClick(Json_Battle_Player_Static.Attack_SkillId_1);
+                    break;
                 }
         }
         AttackCDCountNum_1 = AttackCDNum_1;
@@ -555,43 +555,43 @@ public class Player : MonoBehaviour
     }
     public void Button_Attack_2()   //第二個攻擊按鈕
     {
-		//這裡需要去抓玩家設定的主要攻擊技能編號來判斷是甚麼攻擊方式
-		bool AttackOrProject;
-		judgeAttackOrProject(Json_Battle_Player_Static.Attack_SkillId_2, out AttackOrProject);
-		switch (AttackOrProject)
-		{
-			case true:
-				{
-					Attack_ProjectileClic(Json_Battle_Player_Static.Attack_SkillId_2);
-					break;
-				}
-			case false:
-				{
-					AttackClick(Json_Battle_Player_Static.Attack_SkillId_2);
-					break;
-				}
-		}
-		AttackCDCountNum_2 = AttackCDNum_2;
+        //這裡需要去抓玩家設定的主要攻擊技能編號來判斷是甚麼攻擊方式
+        bool AttackOrProject;
+        judgeAttackOrProject(Json_Battle_Player_Static.Attack_SkillId_2, out AttackOrProject);
+        switch (AttackOrProject)
+        {
+            case true:
+                {
+                    Attack_ProjectileClic(Json_Battle_Player_Static.Attack_SkillId_2);
+                    break;
+                }
+            case false:
+                {
+                    AttackClick(Json_Battle_Player_Static.Attack_SkillId_2);
+                    break;
+                }
+        }
+        AttackCDCountNum_2 = AttackCDNum_2;
         InvokeRepeating("AttackCDType_2", 0, 0.1f);
     }
     public void Button_Attack_3()   //第三個攻擊按鈕
     {
-		//這裡需要去抓玩家設定的主要攻擊技能編號來判斷是甚麼攻擊方式
-		bool AttackOrProject;
-		judgeAttackOrProject(Json_Battle_Player_Static.Attack_SkillId_3, out AttackOrProject);
-		switch (AttackOrProject)
-		{
-			case true:
-				{
-					Attack_ProjectileClic(Json_Battle_Player_Static.Attack_SkillId_3);
-					break;
-				}
-			case false:
-				{
-					AttackClick(Json_Battle_Player_Static.Attack_SkillId_3);
-					break;
-				}
-		}
+        //這裡需要去抓玩家設定的主要攻擊技能編號來判斷是甚麼攻擊方式
+        bool AttackOrProject;
+        judgeAttackOrProject(Json_Battle_Player_Static.Attack_SkillId_3, out AttackOrProject);
+        switch (AttackOrProject)
+        {
+            case true:
+                {
+                    Attack_ProjectileClic(Json_Battle_Player_Static.Attack_SkillId_3);
+                    break;
+                }
+            case false:
+                {
+                    AttackClick(Json_Battle_Player_Static.Attack_SkillId_3);
+                    break;
+                }
+        }
         AttackCDCountNum_3 = AttackCDNum_3;
         InvokeRepeating("AttackCDType_3", 0, 0.1f);
     }
@@ -599,21 +599,21 @@ public class Player : MonoBehaviour
     {
         //這裡需要去抓玩家設定的道具編號來判斷是甚麼道具，目前先做一個假內容來讓按鈕有功能
         ItemNum_1 = 5f;
-		Json_Battle_Static.HpNow = Json_Battle_Static.HpNow + ItemNum_1;
+        Json_Battle_Static.HpNow = Json_Battle_Static.HpNow + ItemNum_1;
         switch (Json_Battle_Static.HpNow > Json_Battle_Static.Hp)
-		{
+        {
             case true:
-				{
-					Json_Battle_Static.HpNow = Json_Battle_Static.Hp;
+                {
+                    Json_Battle_Static.HpNow = Json_Battle_Static.Hp;
                     Reflash();
                     break;
-				}
+                }
             case false:
-				{
+                {
                     Reflash();
                     break;
-				}
-		}
+                }
+        }
         ItemCDCountNum_1 = ItemCDNum_1;
         InvokeRepeating("ItemCDType_1", 0, 0.1f);
     }
@@ -626,7 +626,7 @@ public class Player : MonoBehaviour
         {
             case true:
                 {
-					Json_Battle_Static.HpNow = Json_Battle_Static.Hp;
+                    Json_Battle_Static.HpNow = Json_Battle_Static.Hp;
                     Reflash();
                     break;
                 }
@@ -640,7 +640,7 @@ public class Player : MonoBehaviour
         InvokeRepeating("ItemCDType_2", 0, 0.1f);
     }
     public void AttackCDType_1()   //第一個攻擊按鈕倒數顯示的function
-	{
+    {
         AttackCDCount(AttackCD_1, ref AttackCDCountNum_1, Text_AttackCD_1, AttackCDNum_1, Sprite_AttackCD_1, "AttackCDType_1");
     }
     public void AttackCDType_2()   //第二個攻擊按鈕倒數顯示的function
@@ -663,20 +663,20 @@ public class Player : MonoBehaviour
     {
         AttackCD_1.SetActive(true);
         switch (AttackCDCountNum_1 == 0f)
-		{
+        {
             case true:
-				{
+                {
                     AttackCD_1.SetActive(false);
                     CancelInvoke();
                     break;
-				}
+                }
             case false:
-				{
+                {
                     Text_AttackCD_1.text = AttackCDCountNum_1.ToString();
                     Sprite_AttackCD_1.fillAmount = AttackCDCountNum_1 / AttackCDNum_1;
                     break;
-				}
-		}
+                }
+        }
         AttackCDCountNum_1 = float.Parse((AttackCDCountNum_1 - 0.1f).ToString("0.0"));   //可以將float只顯示小數點後一位的方法，小數點後面幾個0，就表示顯示到小數點後幾位
     }
     public void AttackCDCount(GameObject AttaclName, ref float AttackCDCount, Text AttackCDText, float AttackCD, Image AttackSprite, string CancelName)    //第一個攻擊按鈕(主要攻擊)，在點擊後進入攻擊的CD時間
@@ -741,7 +741,7 @@ public class Player : MonoBehaviour
     }
 
     IEnumerator MonsterGroupMoveFast()   //無敵狀態的移動功能
-	{
+    {
         Debug.Log("是否有觸發?");
         while (MonsterGroupObj.transform.localPosition.x != MoveX)
         {
@@ -765,7 +765,7 @@ public class Player : MonoBehaviour
     }
 
     public void ClearPlayerSkillCD()   //重置玩家技能的功能
-	{
+    {
         AttackCDCountNum_1 = 0f;
         AttackCDCountNum_2 = 0f;
         AttackCDCountNum_3 = 0f;
@@ -779,21 +779,21 @@ public class Player : MonoBehaviour
         int TagNum = 0;
         int[] SkillTag;
         GamemanagerObj.LoadSkill();
-		foreach (Json_Skill date in Gamemanager.Json_SkillFile.JsonSkill)
+        foreach (Json_Skill date in Gamemanager.Json_SkillFile.JsonSkill)
         {
             if(date.Id == SkillId)
             {
                 SkillTag = date.SkillTag;
                 TagNum = date.SkillTag.Length;
-				for (int i = 0; i <= TagNum - 1 ; i++)
-				{
-					if (SkillTag[i] == 3)
-					{
+                for (int i = 0; i <= TagNum - 1 ; i++)
+                {
+                    if (SkillTag[i] == 3)
+                    {
                         Debug.Log("該技能包含投射物Tag!");
                         Or = true;
-					}
-				}
-			}
+                    }
+                }
+            }
         }
-	}
+    }
 }

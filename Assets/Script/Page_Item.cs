@@ -17,15 +17,15 @@ public class Page_Item : MonoBehaviour
     public Text Load_Text_ItemInfo;
     public Image Load_Sprite_ItemIcon;
 
-	private void Awake()
-	{
+    private void Awake()
+    {
         LoadItem();
         ChangeItemIcon();
         Load_FirstItemInfo(0);
     }
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         
     }
@@ -37,9 +37,9 @@ public class Page_Item : MonoBehaviour
     }
 
     public void ClosePageItem()
-	{
+    {
         Page_ItemObj.SetActive(false);
-	}
+    }
 
     public void LoadItem()  //把所擁有的道具先複製出來形成道具列表
     {

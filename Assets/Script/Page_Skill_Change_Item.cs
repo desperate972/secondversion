@@ -23,7 +23,7 @@ public class Page_Skill_Change_Item : MonoBehaviour
     }
 
     public void ClickButton()
-	{
+    {
         Gamemanager.SkillOrPotion_Change = Id;
         Gamemanager.SkillOrPotionType_Change = Type;
         Gamemanager.SkillOrPotion_Queue = this.gameObject.name;
