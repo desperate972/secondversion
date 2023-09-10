@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Common
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 621530e935daf504f9d8cc3fd734b933, type: 3}
+    totalSpriteSurfaceArea: 627500
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 8cd45700616891949b219c65460159b7, type: 3}
+  - {fileID: 21300000, guid: c6e47d21bc9e54248be8302e6fa59b0a, type: 3}
+  - {fileID: 21300000, guid: 5de83f21289e4d04d83c2049ec8ae395, type: 3}
+  - {fileID: 21300000, guid: 169155d31e1f6f448a899569d372020c, type: 3}
+  - {fileID: 21300000, guid: 408f0684dc5186e40b4d6aa53f9bcdfd, type: 3}
+  - {fileID: 21300000, guid: 232e8fa492c3f904fb7b8edad61f4c61, type: 3}
+  - {fileID: 21300000, guid: bf3de7a55c70964408a17becce232238, type: 3}
+  - {fileID: 21300000, guid: 04f442263a97a4c46b9928d3456e8505, type: 3}
+  - {fileID: 21300000, guid: cdb52646d5732b646847127b7f5d8ede, type: 3}
+  - {fileID: 21300000, guid: caa65ba633ce801478eaf4885d15dba3, type: 3}
+  - {fileID: 21300000, guid: ede31127bc6f35042ac6e5882044bba7, type: 3}
+  - {fileID: 21300000, guid: 6476ce27dcbfbc94f9fa7b20c5a144d4, type: 3}
+  - {fileID: 21300000, guid: 15939137e480b45409c04d7b34df2b84, type: 3}
+  - {fileID: 21300000, guid: 2eb612978c237f64ab06dfd1eb4db304, type: 3}
+  - {fileID: 21300000, guid: 98a1b897e4bb293448d869ea714889b8, type: 3}
+  - {fileID: 21300000, guid: cfd2f2b890376c446ba677eb9e580f80, type: 3}
+  - {fileID: 21300000, guid: 5bd7ba694f889ab4a833d875fbf9078d, type: 3}
+  - {fileID: 21300000, guid: 2b4bda999fb6a2c4db53b26cc1a46d35, type: 3}
+  - {fileID: 21300000, guid: 947955e989a70f844ac6435c6ceae363, type: 3}
+  - {fileID: 21300000, guid: 070e231ad2bcf014cbf1d1d77389056a, type: 3}
+  - {fileID: 21300000, guid: ad849eba7c2bf3e4aba9a8c659b4d253, type: 3}
+  - {fileID: 21300000, guid: 8a34e8da3dc091546be5aa0acf3e933a, type: 3}
+  - {fileID: 21300000, guid: 6b4e574b8a43c604eafb68b1b958a5ae, type: 3}
+  - {fileID: 21300000, guid: d55b4d5ba1e7dc3438c7b70a77f888b2, type: 3}
+  - {fileID: 21300000, guid: 2e57556be249bf44ead28c3da7550888, type: 3}
+  - {fileID: 21300000, guid: f534502c290b3c0489874244aa8dec76, type: 3}
+  - {fileID: 21300000, guid: 321a2c4cc1bbe4749aa9302bdd8c280f, type: 3}
+  - {fileID: 21300000, guid: b69ce8dc876761f4eaabaa585552260d, type: 3}
+  - {fileID: 21300000, guid: e341216d3ee917a41980ab40c69f2e56, type: 3}
+  - {fileID: 21300000, guid: 76ba836d3c68335459977145f14e932a, type: 3}
+  - {fileID: 21300000, guid: 2997997e93905e64ea617f73b1d03487, type: 3}
+  - {fileID: 21300000, guid: 7b86fcaef59f269418c75ddfda8542d5, type: 3}
+  - {fileID: 21300000, guid: 6138e8ce3c616f046b33c81c263d491a, type: 3}
+  - {fileID: 21300000, guid: 89b94b2ff52c5884aa79626324ec3512, type: 3}
+  - {fileID: 21300000, guid: aba9e85f488eb2549a2a15bb0bc1a00d, type: 3}
+  - {fileID: 21300000, guid: b621a7af531720a4b8956fa7af768f7a, type: 3}
+  - {fileID: 21300000, guid: de3c48efc3343e64bab5be97818c9d42, type: 3}
+  - {fileID: 21300000, guid: 0b71a6ff8c0975547868af8593f03cf7, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Button_Red_Choose
+  - Button_Blue_Choose
+  - Right_1_W
+  - Right_2_W
+  - Button_Orange
+  - puregreen
+  - Button_Blue_Circle
+  - pink
+  - Button_Blue
+  - Left_1_W
+  - Right_2_W_new
+  - yellow
+  - Road
+  - Right_3_W_new
+  - Button_Red_Choose_Circle
+  - Right_1_W_new
+  - gray
+  - WhiteGround
+  - brown
+  - Button_Black_Circle
+  - Left_2_W_new
+  - Left_1_W_new
+  - MidRaod_W_new
+  - Right_3_W
+  - MidRaod_W
+  - Left_3_W_new
+  - Left_2_W
+  - RankFrame_0
+  - Button_Orange_Choose
+  - Button_Blue_Choose_Circle
+  - RankFrame_3
+  - Left_3_W
+  - Button_Red_Circle
+  - RankFrame_2
+  - Button_Red
+  - Button_Orange_Circle
+  - BlackGround
+  - RankFrame_1
+  m_RenderDataMap: {}
+  m_Tag: Common
+  m_IsVariant: 0
